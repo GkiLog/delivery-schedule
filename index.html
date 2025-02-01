@@ -8,16 +8,32 @@
     body { font-family: Arial, sans-serif; }
     h1 { text-align: center; }
     ul { list-style-type: none; padding: 0; }
-    li { padding: 8px; border: 1px solid #ddd; margin-bottom: 4px; }
+    li { padding: 8px; border: 1px solid #ddd; margin-bottom: 4px; cursor: pointer; }
+    .pending { background-color: #f8d7da; }
+    .scheduled { background-color: #fff3cd; }
+    .delivered { background-color: #d4edda; }
   </style>
 </head>
 <body>
   <h1>Today's Delivery Schedule</h1>
-  <ul>
-    <li>TR12345 - Pending</li>
-    <li>TR12346 - Scheduled</li>
-    <li>TR12347 - Delivered</li>
+  <ul id="deliveryList">
+    <li class="pending" onclick="toggleStatus(this)">TR12345 - Pending</li>
+    <li class="scheduled" onclick="toggleStatus(this)">TR12346 - Scheduled</li>
+    <li class="delivered" onclick="toggleStatus(this)">TR12347 - Delivered</li>
   </ul>
+
+  <script>
+    function toggleStatus(item) {
+      if (item.classList.contains('pending')) {
+        item.classList.remove('pending');
+        item.classList.add('scheduled');
+        item.innerHTML = item.innerHTML.replace('Pending', 'Scheduled');
+      } else if (item.classList.contains('scheduled')) {
+        item.classList.remove('scheduled');
+        item.classList.add('delivered');
+        item.innerHTML = item.innerHTML.replace('Scheduled', 'Delivered');
+      }
+    }
+  </script>
 </body>
 </html>
-
